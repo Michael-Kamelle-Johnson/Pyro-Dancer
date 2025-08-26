@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cvrra1icdpdg2"]
+
+[node name="playerexplosion" type="CPUParticles2D"]
+emitting = false
+amount = 20
+explosiveness = 1.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 59.95
+initial_velocity_max = 243.87
+scale_amount_min = 5.0
+scale_amount_max = 5.0
+color = Color(0.912991, 0.757963, 1.15514e-06, 1)

@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=3 uid="uid://bkagv4vawi73s"]
+
+[ext_resource type="Texture2D" uid="uid://uwj0iu2sf3th" path="res://background_sky.png" id="1_05l2w"]
+[ext_resource type="Script" uid="uid://owtnmy0lpfae" path="res://title_screen.gd" id="1_hafda"]
+[ext_resource type="Script" uid="uid://cy7yh0tnrgfsu" path="res://level/CloudLayer.gd" id="2_hafda"]
+[ext_resource type="Texture2D" uid="uid://cuehnoavdsng8" path="res://background_clouds2.png" id="3_tpml5"]
+[ext_resource type="Texture2D" uid="uid://bj01mx3s4wgwo" path="res://background_clouds.png" id="4_jqemp"]
+
+[node name="Title Screen" type="CanvasLayer"]
+script = ExtResource("1_hafda")
+
+[node name="Title" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -162.0
+offset_right = 162.0
+offset_bottom = 60.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.927298, 0, 0.35967, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 61
+text = "Pyro Dancer"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(576, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+modulate = Color(0.75916, 0, 0.0593172, 1)
+texture = ExtResource("1_05l2w")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(576, 0)
+script = ExtResource("2_hafda")
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+texture = ExtResource("3_tpml5")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(576, 0)
+script = ExtResource("2_hafda")
+CLOUD_SPEED = -30
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("4_jqemp")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="Interactions" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = -21.5
+offset_right = 115.0
+offset_bottom = 39.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Start" type="Button" parent="Interactions"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 41
+text = "Let's Dance!"
+
+[node name="Creator" type="Label" parent="."]
+offset_left = 432.0
+offset_top = 296.0
+offset_right = 573.0
+offset_bottom = 328.0
+theme_override_font_sizes/font_size = 18
+text = "SilverKojin 2025"
+
+[connection signal="pressed" from="Interactions/Start" to="." method="_on_start_pressed"]

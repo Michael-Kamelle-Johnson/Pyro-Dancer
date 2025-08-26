@@ -1,0 +1,169 @@
+[gd_scene load_steps=13 format=3 uid="uid://bsxm7l402or0h"]
+
+[ext_resource type="Script" uid="uid://cf3buuv5rfgtg" path="res://object/playerball.gd" id="1_ijohq"]
+[ext_resource type="Texture2D" uid="uid://dm7am6geodcuj" path="res://fireball.png" id="2_bfb3p"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vh4ht"]
+radius = 23.0868
+
+[sub_resource type="Animation" id="Animation_bfb3p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("fireball:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ijohq"]
+resource_name = "spin"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("fireball:rotation")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.101625, 0.2, 0.301852),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.5708, 3.14159, 4.71239]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4nty6"]
+_data = {
+&"RESET": SubResource("Animation_bfb3p"),
+&"spin": SubResource("Animation_ijohq")
+}
+
+[sub_resource type="Animation" id="Animation_jbdaf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_gtxuc"]
+resource_name = "RESET_SHRINK"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_tx2td"]
+resource_name = "shrink1"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(0.4, 0.4)]
+}
+
+[sub_resource type="Animation" id="Animation_ljud3"]
+resource_name = "shrink2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.4, 0.4), Vector2(0.3, 0.3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ljud3"]
+_data = {
+&"RESET": SubResource("Animation_jbdaf"),
+&"RESET_SHRINK": SubResource("Animation_gtxuc"),
+&"shrink1": SubResource("Animation_tx2td"),
+&"shrink2": SubResource("Animation_ljud3")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bfb3p"]
+radius = 32.0
+
+[node name="playerball" type="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
+collision_layer = 16
+collision_mask = 9
+script = ExtResource("1_ijohq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_vh4ht")
+
+[node name="fireball" type="Sprite2D" parent="."]
+position = Vector2(0, -5)
+texture = ExtResource("2_bfb3p")
+
+[node name="killTimer" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_4nty6")
+}
+
+[node name="shrinkAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ljud3")
+}
+
+[node name="hurtbox" type="Area2D" parent="." groups=["fire", "fireball"]]
+collision_layer = 16
+collision_mask = 24
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+shape = SubResource("CircleShape2D_bfb3p")
+
+[node name="lwalldetect" type="RayCast2D" parent="."]
+target_position = Vector2(-28, 0)
+
+[node name="rwalldetect" type="RayCast2D" parent="."]
+target_position = Vector2(28, 0)
+
+[node name="Debug" type="Node2D" parent="."]
+
+[node name="hopLabel" type="Label" parent="Debug"]
+offset_left = -16.0
+offset_top = -80.0
+offset_right = 163.0
+offset_bottom = -33.0
+theme_override_colors/font_color = Color(0.964744, 0.41534, 3.85046e-07, 1)
+theme_override_font_sizes/font_size = 48
+text = "0"
+
+[connection signal="timeout" from="killTimer" to="." method="_on_kill_timer_timeout"]
+[connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]

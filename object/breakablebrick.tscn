@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://cygbgiasp2kcp"]
+
+[ext_resource type="Script" uid="uid://ds38egpvqlvr" path="res://object/breakablebrick.gd" id="1_417hh"]
+[ext_resource type="Texture2D" uid="uid://bkypmm1t4iv5o" path="res://brick.png" id="2_qn0ve"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_417hh"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kgxux"]
+size = Vector2(32, 32)
+
+[node name="breakablebrick" type="StaticBody2D"]
+collision_mask = 0
+script = ExtResource("1_417hh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_417hh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_qn0ve")
+
+[node name="hurtbox" type="Area2D" parent="."]
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+shape = SubResource("RectangleShape2D_kgxux")
+
+[connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]

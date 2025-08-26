@@ -1,0 +1,173 @@
+[gd_scene load_steps=10 format=3 uid="uid://gi6ahp703vc6"]
+
+[ext_resource type="Script" uid="uid://hvvdjnv566v3" path="res://object/firebox.gd" id="1_2b1pu"]
+[ext_resource type="Texture2D" uid="uid://drikbe2p52v0i" path="res://firebox.png" id="1_2tagx"]
+[ext_resource type="Texture2D" uid="uid://d384tj7uq7ujh" path="res://lit_fire.png" id="2_kuqq7"]
+[ext_resource type="AudioStream" uid="uid://do2yxt2tsm26m" path="res://sound/sound/Sfx_Litfire.wav" id="4_lglmh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kuqq7"]
+size = Vector2(26, 22)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2b1pu"]
+radius = 16.0312
+
+[sub_resource type="Animation" id="Animation_lglmh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("fire/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [15]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("fire/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LitFireSFX:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_2b1pu"]
+resource_name = "play_fire"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("fire/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("fire/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_animation_end"
+}]
+}
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LitFireSFX")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [],
+"times": PackedFloat32Array()
+}
+tracks/3/use_blend = true
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("LitFireSFX:stream")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_lglmh")]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("LitFireSFX:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b1nu4"]
+_data = {
+&"RESET": SubResource("Animation_lglmh"),
+&"play_fire": SubResource("Animation_2b1pu")
+}
+
+[node name="firebox" type="StaticBody2D"]
+script = ExtResource("1_2b1pu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -11)
+shape = SubResource("RectangleShape2D_kuqq7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("1_2tagx")
+
+[node name="fire" type="Area2D" parent="." groups=["fire"]]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fire"]
+position = Vector2(0, -31)
+shape = SubResource("CircleShape2D_2b1pu")
+disabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="fire"]
+position = Vector2(0, -30)
+texture = ExtResource("2_kuqq7")
+hframes = 4
+vframes = 4
+frame = 15
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_b1nu4")
+}
+
+[node name="cooldownTimer" type="Timer" parent="."]
+
+[node name="LitFireSFX" type="AudioStreamPlayer2D" parent="."]
+volume_db = 3.0
+
+[connection signal="timeout" from="cooldownTimer" to="." method="_on_cooldown_timer_timeout"]

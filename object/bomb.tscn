@@ -1,0 +1,245 @@
+[gd_scene load_steps=14 format=3 uid="uid://dns6udwvkaqoh"]
+
+[ext_resource type="Texture2D" uid="uid://cu342g70p14xy" path="res://bomb.png" id="1_573fp"]
+[ext_resource type="Script" uid="uid://d175vqqbm2ndx" path="res://object/bomb.gd" id="1_nfxiy"]
+[ext_resource type="Texture2D" uid="uid://bxq1kxhpmuwij" path="res://bombfire.png" id="2_4fn8o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nfxiy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nfxiy"]
+radius = 6.5
+
+[sub_resource type="Animation" id="Animation_nfxiy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bomb/spark:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bomb/spark:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-7, -12)]
+}
+
+[sub_resource type="Animation" id="Animation_4fn8o"]
+resource_name = "ticking"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bomb/spark:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bomb/spark:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-7, -12)]
+}
+
+[sub_resource type="Animation" id="Animation_6w74q"]
+resource_name = "ticking_2"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bomb/spark:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bomb/spark:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-3, -10)]
+}
+
+[sub_resource type="Animation" id="Animation_bwkwj"]
+resource_name = "ticking_3"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bomb/spark:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bomb/spark:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, -7)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6w74q"]
+_data = {
+&"RESET": SubResource("Animation_nfxiy"),
+&"ticking": SubResource("Animation_4fn8o"),
+&"ticking_2": SubResource("Animation_6w74q"),
+&"ticking_3": SubResource("Animation_bwkwj")
+}
+
+[sub_resource type="Animation" id="Animation_apr5j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bomb:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, -2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bomb:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_fy0rd"]
+resource_name = "default"
+length = 1.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bomb:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-1, 1), Vector2(-1, -4), Vector2(-1, -4.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bomb:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 0.625), Vector2(1.4375, 1.25), Vector2(1.375, 1.3125)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ugjkb"]
+_data = {
+&"RESET": SubResource("Animation_apr5j"),
+&"default": SubResource("Animation_fy0rd")
+}
+
+[node name="Bomb" type="RigidBody2D"]
+position = Vector2(0, 1.19209e-07)
+collision_layer = 8
+collision_mask = 3
+mass = 0.7
+can_sleep = false
+script = ExtResource("1_nfxiy")
+
+[node name="hurtbox" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+shape = SubResource("RectangleShape2D_nfxiy")
+debug_color = Color(0.993532, 0, 0.236171, 0.42)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 1)
+shape = SubResource("CircleShape2D_nfxiy")
+
+[node name="bomb" type="Sprite2D" parent="."]
+position = Vector2(-1, -2)
+texture = ExtResource("1_573fp")
+
+[node name="spark" type="Sprite2D" parent="bomb"]
+position = Vector2(-7, -12)
+texture = ExtResource("2_4fn8o")
+hframes = 2
+vframes = 2
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_6w74q")
+}
+
+[node name="squashAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ugjkb")
+}
+
+[node name="tickTimer" type="Timer" parent="."]
+
+[node name="killTimer" type="Timer" parent="."]
+
+[connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="body_entered" from="hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="timeout" from="tickTimer" to="." method="_on_tick_timer_timeout"]
+[connection signal="timeout" from="killTimer" to="." method="_on_kill_timer_timeout"]

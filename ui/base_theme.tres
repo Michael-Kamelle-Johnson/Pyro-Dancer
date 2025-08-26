@@ -1,0 +1,31 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://dpoqyxpe6vr5y"]
+
+[ext_resource type="Texture2D" uid="uid://brr82xgyu0xnc" path="res://ui/button_disabled.png" id="1_2b18n"]
+[ext_resource type="Texture2D" uid="uid://cov6sg3jek3b6" path="res://ui/button_normal.png" id="1_d8awb"]
+[ext_resource type="Texture2D" uid="uid://t6gjb8d4x8ro" path="res://ui/button_pressed.png" id="2_52fkg"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0also"]
+texture = ExtResource("1_2b18n")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_52fkg"]
+texture = ExtResource("1_d8awb")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2b18n"]
+texture = ExtResource("2_52fkg")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[resource]
+Button/styles/disabled = SubResource("StyleBoxTexture_0also")
+Button/styles/normal = SubResource("StyleBoxTexture_52fkg")
+Button/styles/pressed = SubResource("StyleBoxTexture_2b18n")

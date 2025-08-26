@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://dq5i7mfb34dyi"]
+
+[ext_resource type="Theme" uid="uid://c35raqoox5k1h" path="res://ui/main_theme.tres" id="1_hlshe"]
+
+[node name="GameplayUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_hlshe")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 264.0
+offset_bottom = 152.0
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 64.0
+offset_right = 250.0
+offset_bottom = 96.0
+text = "This is some Text!"
